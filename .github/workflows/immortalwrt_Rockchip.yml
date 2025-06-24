@@ -165,19 +165,6 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         git clone -b main https://github.com/${{ env.REPO }}.git main
-    - name: config文件上传自动更新3
-      run: |
-        cp ./openwrt/.config $GITHUB_WORKSPACE/main/${{ env.CONFIG_FILE }}
-        cp ./openwrt/bin/targets/*/*/config.buildinfo $GITHUB_WORKSPACE/main/${{ env.CONFIG_BUILD }}
-        cd $GITHUB_WORKSPACE/main
-        git add .
-        if git diff --cached --quiet; then
-          echo "nothing to commit"
-        else
-          git commit -am "update $(date '+%Y-%m-%d %H:%M:%S')"
-          git push --quiet "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ env.REPO }}.git" HEAD:main
-        fi
-
     - name: 查看磁盘使用情况
       if: (!cancelled())
       run: df -hT

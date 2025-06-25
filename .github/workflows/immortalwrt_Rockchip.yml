@@ -84,7 +84,7 @@ jobs:
 
     - name: 加载config 执行DIY_P2_SH defconfig
       run: |
-        [ -e ${{ env.CONFIG_BUILD}} ] && mv ${{ env.CONFIG_BUILD}} openwrt/.config
+        [ -e ${{ env.CONFIG_FILE}} ] && mv ${{ env.CONFIG_FILE}} openwrt/.config
         chmod +x ${{ env.DIY_P2_SH }}
         cd openwrt
         $GITHUB_WORKSPACE/${{ env.DIY_P2_SH }}
